@@ -64,10 +64,16 @@ Skill ini menjalankan alur kerja otomatis untuk memproduksi video vertikal (**9:
 ### Tahap 5: Review Seluruh Prompt oleh User
 - **🛑 GERBANG REVIEW 2 (WAJIB):** Tampilkan seluruh daftar prompt shot kepada user untuk diperiksa dan disetujui sebelum dikirim ke Google Flow.
 
-### Tahap 6: Eksekusi Google Flow & Auto-Upscale 2K
-- Jalankan generasi gambar dengan model **Nano Banana 2.1** (aspek 9:16).
-- Gambar di-download dengan memilih opsi **2K** (resolusi ditingkatkan).
-- Tanpa menggunakan model video Omni Flash sama sekali, sehingga 100% kredit video aman.
+### Tahap 6: Eksekusi Google Flow & Auto-Upscale 2K (Wajib Autonomous oleh AI)
+- ⚠️ **ATURAN MUTLAK:** AI **WAJIB LANGSUNG MENGEKSEKUSI** pembuatan visual secara otomatis di latar belakang menggunakan skrip automation CDP port 9222:
+  ```bash
+  node engine/flow/batch.js <folder_proyek> --aspect 9:16
+  ```
+- 🛑 **DILARANG KERAS** memberikan instruksi manual kepada user untuk membuka browser atau copy-paste prompt! Pengguna meminta sistem ini agar semuanya berjalan otomatis (*end-to-end autonomous*).
+- **Strict 1 Variasi (x1):** Otomatis terkunci pada `x1` (1 variasi gambar saja, bukan 2) agar proses cepat dan efisien.
+- **Model:** `Nano Banana 2.1` (100% GAMBAR STATIS vertikal 9:16).
+- **Auto-Upscale 2K:** Hasil gambar otomatis diunduh dalam resolusi tinggi 2K ke folder proyek.
+- Laporkan progres secara berkala (misal tiap beberapa shot selesai).
 
 ### Tahap 7: Editing & Rendering di Remotion (Shorts Mode)
 - Dubbing narasi via Cartesia AI (`engine/tts`) menggunakan API Key & Voice ID.

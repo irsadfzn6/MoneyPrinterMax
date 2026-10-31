@@ -46,8 +46,14 @@ Anda **WAJIB** mengeksekusi tahapan ini secara berurutan tanpa melewatkan gerban
 ### Tahap 5: Review Seluruh Prompt oleh User
 - **🛑 GERBANG REVIEW 2 (STOP & TUNGGU):** Tampilkan daftar prompt shot lengkap kepada user. Hanya lanjutkan ke Google Flow setelah user menyatakan setuju!
 
-### Tahap 6: Eksekusi Google Flow & Auto-Upscale
-- Jalankan modul `engine/flow/batch.js` terhubung ke Chrome CDP port 9222.
+### Tahap 6: Eksekusi Google Flow & Auto-Upscale (Wajib Autonomous oleh AI)
+- ⚠️ **ATURAN MUTLAK:** AI **WAJIB LANGSUNG MENGEKSEKUSI** pembuatan visual secara otomatis di latar belakang menggunakan skrip automation CDP port 9222:
+  ```bash
+  node engine/flow/batch.js <folder_proyek>
+  ```
+- 🛑 **DILARANG KERAS** memberikan instruksi manual kepada user untuk membuka browser atau copy-paste prompt! Sistem ini adalah automated pipeline mandiri.
+- **Strict 1 Variasi Saja (x1):** Script dipastikan memilih `x1` (1 variasi saja, bukan 2) agar tidak membakar kredit ganda.
+- **Video Model & Durasi:** Model `Omni Flash 1.1` **wajib 4 detik** (hanya 7 kredit, bukan 8 detik yang memakan 24 kredit).
 - **Auto-Upscale:** Gambar wajib di-download dengan memilih opsi **2K**, dan video wajib memilih opsi **1080p**.
 - **Credit Exhaustion Fallback:** Jika kuota video habis ("Peringatan poin tidak cukup"), sistem otomatis beralih membuat gambar dengan Nano Banana 2.1 untuk sisa shot.
 
