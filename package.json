@@ -1,0 +1,31 @@
+{
+  "name": "moneyprintermax",
+  "version": "1.0.0",
+  "description": "Autonomous YouTube Long & Shorts Video Production Engine with Google Flow (Nano Banana 2.1 & Omni Flash 4s), Multi-TTS, and Remotion.",
+  "main": "bin/cli.js",
+  "bin": {
+    "moneyprintermax": "bin/cli.js"
+  },
+  "scripts": {
+    "flow:batch": "node engine/flow/batch.js",
+    "render:long": "node engine/remotion/render_all.js long",
+    "render:shorts": "node engine/remotion/render_all.js shorts"
+  },
+  "keywords": [
+    "youtube-automation",
+    "google-flow",
+    "remotion",
+    "video-generator",
+    "nano-banana",
+    "omni-flash",
+    "cartesia",
+    "edge-tts",
+    "ai-video"
+  ],
+  "author": "irsad fauzan <irsadfzn6@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.5"
+  }
+}

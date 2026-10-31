@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.crdownload
+*.tmp
+engine/remotion/out/
+engine/remotion/public/audio/*.wav
+engine/remotion/public/audio/*.mp3
+engine/remotion/public/adegan*
+engine/remotion/src/data/*.json
+.DS_Store
+Thumbs.db
