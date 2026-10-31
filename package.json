@@ -7,6 +7,7 @@
     "moneyprintermax": "bin/cli.js"
   },
   "scripts": {
+    "sync:flow": "node bin/sync-flow.js",
     "flow:batch": "node engine/flow/batch.js",
     "render:long": "node engine/remotion/render_all.js long",
     "render:shorts": "node engine/remotion/render_all.js shorts"

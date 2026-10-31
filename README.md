@@ -78,6 +78,13 @@ npm install
 cd engine/remotion && npm install && cd ../..
 ```
 
+### 🔄 Sinkronisasi Engine Google Flow (Upstream Updates)
+Jika ada pembaruan model baru atau perbaikan DOM dari `google-flow-automation`, perbarui engine secara otomatis dengan satu perintah:
+```bash
+npm run sync:flow
+```
+Perintah ini akan secara otomatis menarik file terbaru dari `upstream/main` (`irsadfzn6/google-flow-automation`) ke dalam `engine/flow/`.
+
 ### 3. Setup Konfigurasi & API Key
 Salin konfigurasi environment dan masukkan API key Cartesia / ElevenLabs Anda:
 ```bash
