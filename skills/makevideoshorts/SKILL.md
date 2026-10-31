@@ -1,58 +1,78 @@
 ---
 name: makevideoshorts
-description: Autonomous end-to-end production pipeline for YouTube Shorts, TikTok & Reels (Vertical 9:16, 30-60s) using Google Flow (Nano Banana 2.1 & Omni Flash 4s with 2K/1080p auto-upscale), Multi-TTS, and Remotion. Triggered by /makevideoshorts or requests to create viral vertical short videos.
+description: Autonomous end-to-end production pipeline for viral YouTube Shorts, TikTok & Reels (Vertical 9:16, 30-60s) using 100% Nano Banana 2.1 static images (ZERO video credit burn), rapid visual shifts every 2-3s matching narration, Multi-TTS with API key, and Remotion. Triggered by /makevideoshorts or requests to create vertical short videos.
 ---
 
 # Skill: /makevideoshorts (Viral Vertical Shorts Production)
 
-Skill ini menjalankan alur kerja otomatis untuk memproduksi video vertikal (**9:16**, resolusi 1080x1920, durasi 30–60 detik) dengan pacing super cepat, hook memikat pada 3 detik pertama, dan animasi subtitle memantul di tengah layar.
+Skill ini menjalankan alur kerja otomatis untuk memproduksi video vertikal (**9:16**, resolusi 1080x1920, durasi 30–60 detik) dengan **100% GAMBAR (Nano Banana 2.1)**—**TIDAK MENGGUNAKAN VIDEO OMNI FLASH SEHINGGA ZERO CREDIT BURN (HEMAT 100% KREDIT VIDEO)**.
 
 ---
 
-## ⚡ Karakteristik Khusus Format Shorts
+## ⚡ Karakteristik & Aturan Mutlak Format Shorts
 
 1. **Rasio Aspek:** 9:16 (Vertikal / Portrait).
-2. **Pacing Visual:** Visual berganti setiap **1.5 hingga 3 detik** (~15–20 shot dalam 45 detik) untuk mempertahankan retensi penonton 100%+.
-3. **Hook 3 Detik Pertama:** Langsung memulai dengan kalimat mengejutkan atau pertanyaan kontroversial.
-4. **Captions Viral:** Teks subtitle besar di tengah layar bergaya *bouncing word-by-word* dengan warna kuning/putih dan stroke hitam pekat.
+2. **100% Gambar (Nano Banana 2.1):** Seluruh shot **HANYA menggunakan gambar** Nano Banana 2.1 (gratis kuota tanpa membakar kredit video). Jangan gunakan video!
+3. **Pacing Visual Cepat (2–3 Detik):** Gambar wajib berganti setiap **2 hingga 3 detik** (~15–20 gambar untuk durasi 45 detik).
+4. **Visual Selaras Narasi:** Setiap gambar wajib mengilustrasikan secara spesifik penggalan kalimat narasi yang sedang diucapkan saat itu juga.
+5. **Karakter Stickman Konsisten:** Karakter stickman acuan dibuat di awal dan diunggah sebagai *ingredient* di Google Flow pada shot-shot yang memunculkan karakter.
+6. **Gerak Kamera Remotion:** Gambar statis diberi efek gerak dinamis *Ken Burns* (zoom in/out, pan, shake, tilt) di Remotion agar visual tampak hidup seperti animasi penuh.
+7. **Captions Viral:** Teks subtitle memantul di tengah layar per kata (*bouncing word-by-word*) dengan warna kuning/putih dan stroke hitam tebal.
+8. **Narasi Wajib API Key & Voice ID:** Menggunakan Cartesia AI (suara Victor) atau ElevenLabs.
 
 ---
 
-## 🛑 9 Tahapan Baku & Aturan Mutlak
+## 🛑 9 Tahapan Baku yang Ditegakkan Secara Ketat
 
-### Tahap 1: Ideation (Hook Pendek & Cepat)
-- Berikan 5 ide shorts berpotensi viral tinggi atau konfirmasi topik dari user.
+### Tahap 1: Ideation (Hook Pendek & Mengejutkan)
+- Berikan 5 ide shorts berpotensi viral tinggi dengan hook kontroversial/penasaran pada 3 detik pertama, atau konfirmasi topik dari user.
 
 ### Tahap 2: Naskah Narasi Shorts (30–60 Detik)
-- Tulis naskah narasi cepat, padat, tanpa basa-basi (sekitar 80–140 kata).
-- **🛑 GERBANG REVIEW 1:** Tampilkan naskah narasi shorts kepada user dan tunggu konfirmasi sebelum melanjutkan.
+- Tulis naskah narasi cepat, padat, tanpa basa-basi (sekitar 75–130 kata).
+- Bagi narasi menjadi penggalan kalimat pendek berdurasi 2–3 detik per kalimat.
+- **🛑 GERBANG REVIEW 1 (WAJIB):** Tampilkan naskah narasi shorts kepada user dan **STOP**. Tunggu konfirmasi/revisi teks sebelum lanjut!
 
 ### Tahap 3: Prompt Karakter Referensi
-- Buat karakter acuan bergaya 2D minimalist vector stickman dengan latar polos netral:
-  `Simple black stickman character with round white head, thick black outline, flat 2D vector animation style, [tema], minimal details, vertical 9:16, no text, full body, plain neutral beige background.`
+- Buat karakter acuan bergaya *2D minimalist vector stickman* dengan latar polos netral (`plain neutral off-white beige background`, full body, neutral pose):
+  ```text
+  Simple black stickman character with round white head, thick black outline, flat 2D vector animation style, [tema], minimal details, vertical 9:16, no text, full body, plain neutral beige background.
+  ```
+- Generate karakter pertama kali dan simpan di `visual/karakter/<nama>.png`.
 
-### Tahap 4: Prompt Shot Vertikal (9:16)
-- Susun 15–20 shot dinamis (aspek 9:16).
-- Sertakan **📌 Referensi Karakter:** pada setiap shot.
+### Tahap 4: Prompt Shot Vertikal (9:16 - 100% GAMBAR)
+- Susun 15–20 shot gambar (aspek 9:16, durasi 2–3 detik per shot).
+- Format setiap shot:
+  - **Model:** `Nano Banana 2.1` (GAMBAR STATIS)
+  - **Narasi:** Penggalan kalimat 2–3 detik
+  - **Visual:** Aksi visual spesifik yang mencerminkan kalimat narasi
+  - **📌 Referensi Karakter:** File karakter acuan yang relevan (misal `budi-panik.png`) atau `Tanpa Karakter`
+- Contoh:
+  ```text
+  ### Shot 001 [🖼️ GAMBAR 2.5s - Ken Burns Zoom In]
+  - **Narasi:** "Tepat jam 12 siang, Matahari tiba-tiba padam total!"
+  - **📌 Referensi Karakter:** budi-panik.png
+  Simple black stickman character with round white head, thick black outline, flat 2D vector animation style, vertical 9:16, no text. Stickman looking up at a black void where the sun used to be, holding his head in pure panic, city street background turning pitch black with starry sky.
+  ```
 
 ### Tahap 5: Review Seluruh Prompt oleh User
-- **🛑 GERBANG REVIEW 2:** Tampilkan daftar prompt kepada user untuk diperiksa dan disetujui.
+- **🛑 GERBANG REVIEW 2 (WAJIB):** Tampilkan seluruh daftar prompt shot kepada user untuk diperiksa dan disetujui sebelum dikirim ke Google Flow.
 
-### Tahap 6: Eksekusi Google Flow & Auto-Upscale
-- Jalankan generasi dengan aspek **9:16**:
-  - Gambar: Nano Banana 2.1 (Auto-upscale ke 2K)
-  - Video: Omni Flash 1.1 durasi 4s (Auto-upscale ke 1080p)
-  - Fallback otomatis ke gambar jika kuota video habis.
+### Tahap 6: Eksekusi Google Flow & Auto-Upscale 2K
+- Jalankan generasi gambar dengan model **Nano Banana 2.1** (aspek 9:16).
+- Gambar di-download dengan memilih opsi **2K** (resolusi ditingkatkan).
+- Tanpa menggunakan model video Omni Flash sama sekali, sehingga 100% kredit video aman.
 
 ### Tahap 7: Editing & Rendering di Remotion (Shorts Mode)
-- Dubbing narasi cepat via Multi-TTS.
-- Jalankan `build_scene.py` dan render dengan mode shorts:
+- Dubbing narasi via Cartesia AI (`engine/tts`) menggunakan API Key & Voice ID.
+- Remotion memotong audio dan menyinkronkan pergantian gambar setiap 2–3 detik sesuai naskah.
+- Terapkan animasi Ken Burns dinamis pada gambar dan subtitle memantul di tengah.
+- Render via:
   `node engine/remotion/render_all.js shorts`
-- Menghasilkan `final_video_shorts.mp4` (1080x1920) dengan subtitle memantul di tengah.
+- Menghasilkan `final_video_shorts.mp4` (1080x1920) Full HD tanpa freeze.
 
 ### Tahap 8: Cover / Thumbnail Shorts
-- Generate frame cover vertikal 9:16 via Nano Banana 2.1 dengan teks tipografi terintegrasi.
+- Generate frame cover vertikal 9:16 via Nano Banana 2.1 dengan tipografi teks judul tebal langsung di-prompt ke dalam gambar AI.
 
-### Tahap 9: YouTube Shorts Metadata
+### Tahap 9: YouTube Shorts SEO Packaging
 - Judul pendek catchy (<50 karakter) diakhiri `#shorts`.
 - Deskripsi singkat dan 5–10 hashtag viral (`#shorts #sains #faktamenarik`).

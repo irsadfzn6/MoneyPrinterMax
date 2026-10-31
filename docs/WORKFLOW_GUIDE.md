@@ -11,11 +11,11 @@ flowchart TD
     A["1. Ideation: Berikan 10 Ide / Tanya Topik"] --> B["2. Naskah & Narasi Per Adegan"]
     B --> C{Pemberhentian Review 1: User Review Naskah}
     C -->|Revisi/Disetujui| D["3. Buat Prompt Karakter Referensi"]
-    D --> E["4. Buat Prompt Shot (Gambar/Video) + Mapping Karakter"]
+    D --> E["4. Buat Prompt Shot + Mapping Karakter Acuan"]
     E --> F{Pemberhentian Review 2: User Review Seluruh Prompt}
-    F -->|Disetujui| G["5. Eksekusi Google Flow: Gambar (Nano Banana 2.1) & Video (Omni Flash 1.1 4s)"]
-    G --> H["6. Auto-Upscale (2K Gambar, 1080p Video) & Fallback ke Gambar jika Poin Habis"]
-    H --> I["7. Remotion Assembly: Voiceover Multi-TTS, Captions, Ken Burns, Watermark, Render"]
+    F -->|Disetujui| G["5. Eksekusi Google Flow & Auto-Upscale (2K Gambar / 1080p Video)"]
+    G --> H["6. Format Strategy: Long (Omni Flash 4s + Image Fallback) vs Shorts (100% Gambar Nano Banana 2.1)"]
+    H --> I["7. Remotion Assembly: Voiceover TTS (API Key + Voice ID), Captions, Ken Burns, Watermark"]
     I --> J["8. Thumbnail AI Nano Banana 2.1 (Teks Langsung di Prompt Gambar)"]
     J --> K["9. YouTube SEO Packaging: Judul, Timestamps, Tag, Pinned Comment"]
 ```
@@ -25,37 +25,40 @@ flowchart TD
 ## 📌 Penjelasan Rinci Setiap Tahap
 
 ### Tahap 1: Ideation (Brainstorming Konsep)
-- Berikan **10 ide cerita berpotensi viral / high-retention** dengan hook kuat.
-- Atau tanyakan topik spesifik apa yang ingin diangkat oleh user.
+- **Long Video:** Sajikan **10 ide cerita berpotensi viral & high-retention** dengan hook kuat.
+- **Shorts:** Sajikan **5 ide shorts** dengan hook mengejutkan pada 3 detik pertama.
+- Atau tanyakan topik spesifik yang diinginkan user.
 
 ### Tahap 2: Naskah & Narasi Per Adegan
-- Tulis naskah narasi terbagi per adegan (8–12 adegan untuk video panjang, atau 1 adegan dinamis untuk shorts).
-- 🛑 **GERBANG REVIEW 1 (WAJIB):** Berhenti dan biarkan user mereview teks narasi terlebih dahulu. Jangan melanjutkan ke tahap visual sebelum naskah disetujui!
+- Tulis naskah narasi terbagi per adegan.
+- Untuk Shorts: naskah dipotong-potong menjadi kalimat ringkas berdurasi 2–3 detik per visual.
+- 🛑 **GERBANG REVIEW 1 (WAJIB):** Berhenti dan biarkan user mereview teks narasi terlebih dahulu. **JANGAN LANJUT** sebelum naskah disetujui!
 
 ### Tahap 3: Prompt Karakter Referensi
 - Gaya visual baku (sesuai conversation `f6935784-c606-441d-87fd-2e4df8c517f3`):
   `Simple black stickman character with round white head, thick black outline, flat 2D vector animation style, [setting/tema], minimal details, cinematic 16:9/9:16, no text, [pose]`
-- Buat 4–6 karakter acuan dengan latar polos netral (`plain neutral off-white background`), *full body*, pose netral.
-- Generate karakter pertama kali dan simpan di `visual/karakter/<nama>.png`.
+- Buat karakter acuan dengan latar polos netral (`plain neutral off-white beige background`), *full body*, pose netral.
+- Simpan di `visual/karakter/<nama>.png`.
 
 ### Tahap 4: Prompt Shot & Pemetaan Karakter Acuan
-- Setiap shot dibagi menjadi Gambar atau Video (4 detik).
-- Setiap prompt shot wajib menyertakan tag **📌 Referensi Karakter:** yang menunjuk ke file karakter yang harus diunggah sebagai *ingredient* di Google Flow.
+- **Strategi Format:**
+  - **Video Panjang (16:9):** Menggabungkan GAMBAR (Nano Banana 2.1) dan VIDEO (Omni Flash 1.1 durasi 4s).
+  - **Shorts (9:16):** **100% GAMBAR (Nano Banana 2.1)** tanpa menggunakan video Omni Flash agar **hemat 100% kredit**. Gambar berganti cepat tiap 2–3 detik sesuai naskah.
+- Setiap prompt shot wajib menyertakan baris **📌 Referensi Karakter:** yang menunjuk ke file karakter acuan.
 
 ### Tahap 5: Review Seluruh Prompt
-- 🛑 **GERBANG REVIEW 2 (WAJIB):** Tampilkan daftar prompt kepada user untuk diperiksa sebelum dikirim ke Google Flow.
+- 🛑 **GERBANG REVIEW 2 (WAJIB):** Tampilkan daftar prompt shot kepada user untuk diperiksa sebelum dikirim ke Google Flow.
 
 ### Tahap 6: Eksekusi Google Flow & Auto-Upscale
-- **Gambar:** Menggunakan `Nano Banana 2.1`.
-- **Video:** Menggunakan `Omni Flash 1.1` berdurasi **wajib 4 detik**.
-- **Auto-Upscale:** Script otomatis memilih resolusi **2K** untuk gambar dan **1080p** untuk video saat mengunduh.
-- **Credit Fallback:** Jika poin video habis, sistem otomatis beralih membuat gambar dengan Nano Banana 2.1 untuk sisa shot.
+- **Auto-Upscale:** Gambar wajib di-download dengan memilih opsi **2K**, dan video wajib memilih opsi **1080p**.
+- **Credit Fallback:** Pada video panjang, jika kuota video habis, sistem otomatis beralih membuat gambar Nano Banana 2.1 untuk sisa shot.
 
 ### Tahap 7: Editing & Rendering di Remotion
-- Sinkronisasi audio dubbing TTS per adegan.
-- Pergerakan kamera Ken Burns (zoom in, zoom out, pan, tilt, shake) pada gambar statis.
-- *Dynamic playbackRate* pada klip video agar video Omni Flash 4s tidak pernah mengalami freeze.
-- Teks caption dinamis per kata & watermark `@channel`.
+- **TTS Engine:** Menggunakan API Key dan Voice ID resmi (Cartesia AI suara Victor atau ElevenLabs).
+- **Animasi Kamera:** Gerak kamera dinamis *Ken Burns* (zoom in/out, pan, tilt, shake) pada gambar statis.
+- **Zero Freeze:** *Dynamic playbackRate* pada klip video.
+- **Captions:** Subtitle kata per kata dinamis (bouncing di tengah untuk Shorts, lower-third untuk Long Video).
+- Watermark `@channel` terpasang konsisten.
 
 ### Tahap 8: Pembuatan Thumbnail AI
 - Menggunakan `Nano Banana 2.1` di Google Flow.

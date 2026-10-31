@@ -1,54 +1,61 @@
 /**
- * index.js - Unified Multi-TTS Engine
- * Supports: Cartesia AI, ElevenLabs, Edge-TTS (Free), or local audio files.
+ * index.js - Unified TTS Engine (Cartesia AI & ElevenLabs)
+ * Wajib menggunakan API Key dan Voice ID.
  */
 
 const fs = require("fs");
 const path = require("path");
 const { generateCartesiaAudio } = require("./cartesia");
-const { generateEdgeAudio } = require("./edge_tts");
 const { generateElevenLabsAudio } = require("./elevenlabs");
 
 async function generateSpeech({
   text,
   outputPath,
-  provider = process.env.TTS_PROVIDER || "auto",
+  provider = process.env.TTS_PROVIDER || "cartesia",
   voiceId = null,
   apiKey = null
 }) {
   const chosenProvider = provider.toLowerCase();
 
-  // Auto-detection logic:
-  // If provider is 'auto', pick Cartesia if key exists, then ElevenLabs, else fallback to free Edge-TTS!
-  if (chosenProvider === "auto") {
-    if (process.env.CARTESIA_API_KEY || (apiKey && apiKey.startsWith("sk_car_"))) {
-      return await generateCartesiaAudio({ text, outputPath, apiKey, voiceId });
+  if (chosenProvider === "cartesia" || chosenProvider === "auto") {
+    const key = apiKey || process.env.CARTESIA_API_KEY;
+    const vId = voiceId || process.env.CARTESIA_VOICE_ID;
+    if (!key) {
+      throw new Error(
+        "CARTESIA_API_KEY wajib diisi! Masukkan API key Cartesia Anda di file .env atau parameter fungsi."
+      );
     }
-    if (process.env.ELEVENLABS_API_KEY) {
-      return await generateElevenLabsAudio({ text, outputPath, apiKey, voiceId });
+    if (!vId) {
+      throw new Error(
+        "CARTESIA_VOICE_ID wajib diisi! Masukkan Voice ID Cartesia Anda di file .env atau parameter fungsi."
+      );
     }
-    console.log("[TTS] No paid API key detected. Using high-quality Edge-TTS (FREE)...");
-    return await generateEdgeAudio({ text, outputPath, voice: voiceId || undefined });
-  }
-
-  if (chosenProvider === "cartesia") {
-    return await generateCartesiaAudio({ text, outputPath, apiKey, voiceId });
+    return await generateCartesiaAudio({ text, outputPath, apiKey: key, voiceId: vId });
   }
 
   if (chosenProvider === "elevenlabs") {
-    return await generateElevenLabsAudio({ text, outputPath, apiKey, voiceId });
+    const key = apiKey || process.env.ELEVENLABS_API_KEY;
+    const vId = voiceId || process.env.ELEVENLABS_VOICE_ID;
+    if (!key) {
+      throw new Error(
+        "ELEVENLABS_API_KEY wajib diisi! Masukkan API key ElevenLabs Anda di file .env atau parameter fungsi."
+      );
+    }
+    if (!vId) {
+      throw new Error(
+        "ELEVENLABS_VOICE_ID wajib diisi! Masukkan Voice ID ElevenLabs Anda di file .env atau parameter fungsi."
+      );
+    }
+    return await generateElevenLabsAudio({ text, outputPath, apiKey: key, voiceId: vId });
   }
 
-  if (chosenProvider === "edge" || chosenProvider === "edge-tts" || chosenProvider === "free") {
-    return await generateEdgeAudio({ text, outputPath, voice: voiceId || undefined });
-  }
-
-  throw new Error(`Unsupported TTS provider: "${provider}". Use "cartesia", "elevenlabs", "edge-tts", or "auto".`);
+  throw new Error(
+    `Unsupported TTS provider: "${provider}". Gunakan "cartesia" (default) atau "elevenlabs" dengan menyertakan API Key dan Voice ID.`
+  );
 }
 
 module.exports = {
   generateSpeech,
   generateCartesiaAudio,
-  generateEdgeAudio,
   generateElevenLabsAudio
 };

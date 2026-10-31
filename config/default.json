@@ -14,8 +14,7 @@
     "videoUpscaleTarget": "1080p"
   },
   "tts": {
-    "defaultProvider": "auto",
-    "edgeTtsVoice": "id-ID-ArdiNeural",
+    "defaultProvider": "cartesia",
     "cartesiaVoiceId": "b2a6771c-0f34-432b-9cf2-fd22efd32e3b"
   },
   "video": {
