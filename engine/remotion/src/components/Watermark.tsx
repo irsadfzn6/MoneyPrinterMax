@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Watermark: React.FC<{ text?: string; isShorts?: boolean }> = ({
-  text = "@nalarkosmik",
+  text = "@yourchannel",
   isShorts = false,
 }) => {
   return (

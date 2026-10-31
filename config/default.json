@@ -1,8 +1,8 @@
 {
   "channel": {
-    "name": "Nalar Kosmik",
-    "handle": "@nalarkosmik",
-    "watermark": "@nalarkosmik"
+    "name": "Your Channel Name",
+    "handle": "@yourchannel",
+    "watermark": "@yourchannel"
   },
   "flow": {
     "cdpPort": 9222,

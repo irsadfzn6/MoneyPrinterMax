@@ -17,7 +17,7 @@ export const Scene: React.FC<{
   data: SceneData;
   isShorts?: boolean;
   watermark?: string;
-}> = ({ data, isShorts = false, watermark = "@nalarkosmik" }) => {
+}> = ({ data, isShorts = false, watermark = "@yourchannel" }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0b0f19" }}>
       {data.shots.map((shot) => (

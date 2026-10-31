@@ -9,6 +9,13 @@ Skill ini menjalankan alur kerja otomatis untuk memproduksi video vertikal (**9:
 
 ---
 
+## 🌐 Prinsip Open Source & Netralitas Channel
+- Sistem ini bersifat open-source dan dapat digunakan untuk channel apa pun.
+- **JANGAN PERNAH** mengasumsikan atau mencantumkan nama channel tertentu secara default dalam sambutan, skrip, atau watermark.
+- Gunakan konfigurasi `.env` / `config/default.json` (`CHANNEL_NAME`) atau tanyakan kepada pengguna. Secara default gunakan placeholder netral seperti `Channel Anda` atau `@yourchannel`.
+
+---
+
 ## ⚡ Karakteristik & Aturan Mutlak Format Shorts
 
 1. **Rasio Aspek:** 9:16 (Vertikal / Portrait).

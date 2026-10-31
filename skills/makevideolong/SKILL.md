@@ -1,11 +1,18 @@
 ---
 name: makevideolong
-description: Autonomous end-to-end production pipeline for YouTube Long Videos (16:9, ~5-10 min) using Google Flow (Nano Banana 2.1 & Omni Flash 4s with 2K/1080p auto-upscale), Multi-TTS (Cartesia/ElevenLabs/Free Edge-TTS), and Remotion. Triggered by /makevideolong or requests to create full-length YouTube videos.
+description: Autonomous end-to-end production pipeline for YouTube Long Videos (16:9, ~5-10 min) using Google Flow (Nano Banana 2.1 & Omni Flash 4s with 2K/1080p auto-upscale), Multi-TTS (Cartesia/ElevenLabs with API Key & Voice ID), and Remotion. Triggered by /makevideolong or requests to create full-length YouTube videos.
 ---
 
 # Skill: /makevideolong (YouTube Long-Form Video Production)
 
 Skill ini menjalankan alur kerja otomatis untuk memproduksi video YouTube panjang (**16:9**, durasi ~5–10 menit, 8–12 adegan) dengan gaya visual konsisten 2D flat minimalist vector stickman animation (*Kurzgesagt / Kok Bisa style*).
+
+---
+
+## 🌐 Prinsip Open Source & Netralitas Channel
+- Sistem ini bersifat open-source dan dapat digunakan untuk channel apa pun.
+- **JANGAN PERNAH** mengasumsikan atau mencantumkan nama channel tertentu secara default.
+- Tanyakan nama channel kepada user jika belum didefinisikan, atau baca dari konfigurasi `.env` / `config/default.json` (`CHANNEL_NAME`). Secara default gunakan placeholder netral seperti `Channel Anda` atau `@yourchannel`.
 
 ---
 
@@ -45,11 +52,11 @@ Anda **WAJIB** mengeksekusi tahapan ini secara berurutan tanpa melewatkan gerban
 - **Credit Exhaustion Fallback:** Jika kuota video habis ("Peringatan poin tidak cukup"), sistem otomatis beralih membuat gambar dengan Nano Banana 2.1 untuk sisa shot.
 
 ### Tahap 7: Editing & Rendering di Remotion
-- Dubbing narasi per adegan via `engine/tts` (Cartesia AI atau Edge-TTS gratis).
+- Dubbing narasi per adegan via `engine/tts` (Cartesia AI atau ElevenLabs dengan API Key & Voice ID).
 - Jalankan `python engine/remotion/build_scene.py <project_dir> all`.
 - Gerak kamera dinamis *Ken Burns* pada gambar statis.
 - *Dynamic playbackRate* pada klip video agar video 4s tidak pernah freeze.
-- Subtitle kata-per-kata di bagian bawah dan watermark `@channel`.
+- Subtitle kata-per-kata di bagian bawah dan watermark `@yourchannel`.
 - Render per adegan via `node engine/remotion/render_all.js long` dan gabung menjadi video utuh via ffmpeg.
 
 ### Tahap 8: Pembuatan Thumbnail AI (Nano Banana 2.1)
