@@ -312,6 +312,7 @@ async function main() {
         generate: true,
         wait: true,
         timeout: 300,
+        upscale: true,
         output: outputFile
       });
 
@@ -342,6 +343,7 @@ async function main() {
             generate: true,
             wait: true,
             timeout: 300,
+            upscale: true,
             output: fallbackOutputFile
           });
           console.log(`[FALLBACK BERHASIL] Shot ${shotIdStr} digenerate sebagai gambar: ${fallbackOutputFile}`);

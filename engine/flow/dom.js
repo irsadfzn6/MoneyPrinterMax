@@ -1909,13 +1909,17 @@ async function triggerUpscaleDownload(page, { mediaType = "image", targetResolut
     tile.dispatchEvent(new MouseEvent("mouseenter", { bubbles: true }));
     await new Promise(r => setTimeout(r, 400));
 
-    const moreBtn = tile.querySelector('button[aria-label="Opsi lainnya"]') || document.querySelector('button[aria-label="Opsi lainnya"]');
+    const moreBtn = tile.querySelector('button[aria-label*="Opsi lainnya" i], button[aria-label*="More options" i], button[aria-label*="opsi" i], button[aria-label*="more" i], button[aria-label*="option" i]') 
+      || document.querySelector('button[aria-label*="Opsi lainnya" i], button[aria-label*="More options" i], button[aria-label*="opsi" i], button[aria-label*="more" i]');
     if (!moreBtn) return { success: false, reason: "No more options button" };
     moreBtn.click();
     await new Promise(r => setTimeout(r, 500));
 
     const menuItems = Array.from(document.querySelectorAll('[role="menuitem"], .mat-mdc-menu-item, mat-menu-content button'));
-    const dlItem = menuItems.find(m => (m.innerText || "").toLowerCase().includes("download"));
+    const dlItem = menuItems.find(m => {
+      const txt = (m.innerText || "").toLowerCase();
+      return txt.includes("download") || txt.includes("unduh");
+    });
     if (!dlItem) return { success: false, reason: "No download menu item" };
 
     dlItem.dispatchEvent(new MouseEvent("mouseenter", { bubbles: true }));

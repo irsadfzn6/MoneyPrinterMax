@@ -495,7 +495,8 @@ class FlowClient {
         mediaType: options.mediaType || options.media,
         wait: options.wait !== false,
         timeout: options.timeout || 300,
-        download: options.output || null
+        download: options.output || null,
+        upscale: options.upscale !== undefined ? options.upscale : true
       });
     }
 
