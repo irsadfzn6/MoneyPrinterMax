@@ -16,6 +16,15 @@ Skill ini menjalankan alur kerja otomatis untuk memproduksi video YouTube panjan
 
 ---
 
+## 🛑 ATURAN BATCH: WAJIB x1 (1 VARIASI SAJA)!
+- **DILARANG KERAS** menggunakan atau mengubah pengaturan Google Flow ke `x2`, `x3`, atau `x4`.
+- **DILARANG KERAS** membuat script ad-hoc seperti `set_x2.js` atau sejenisnya!
+- Seluruh generasi GAMBAR dan VIDEO **WAJIB 1 VARIASI (x1)**.
+  - Video Omni Flash 1.1: 1 variasi x 4 detik = hanya 7 kredit (x2 membakar 24+ kredit!).
+  - Gambar Nano Banana 2.1: 1 variasi (cepat, efisien, dan hemat waktu).
+
+---
+
 ## 🛑 9 Tahapan Baku & Aturan Mutlak
 
 Anda **WAJIB** mengeksekusi tahapan ini secara berurutan tanpa melewatkan gerbang review pengguna:
